@@ -25,5 +25,11 @@ public class TestMaximumGenerics {
 		System.out.println("Maximum of 2, 3, 1 is : "+TestMaximumGenerics.maximumInteger(2, 3, 1));
 		System.out.println("Maximum of 1, 3, 2 is : "+TestMaximumGenerics.maximumInteger(1, 3, 2));
 		System.out.println("Maximum of 1, 3, 1 is : "+TestMaximumGenerics.maximumInteger(1, 3, 1));
+		
+		System.out.println("Test case 1.3");
+		// Test Case 1.1 maximum number at first position 
+		System.out.println("Maximum of 2, 1, 3 is : "+TestMaximumGenerics.maximumInteger(2, 1, 3));
+		System.out.println("Maximum of 1, 2, 3 is : "+TestMaximumGenerics.maximumInteger(1, 2, 3));
+		System.out.println("Maximum of 1, 1, 3 is : "+TestMaximumGenerics.maximumInteger(1, 1, 3));
 	}
 }
