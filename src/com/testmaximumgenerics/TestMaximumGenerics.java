@@ -4,27 +4,39 @@ package com.testmaximumgenerics;
  * 
  * @param <Type> should be Comparable
  */
-public class TestMaximumGenerics<Type extends Comparable<Type>> {
-	Type first, second, third;
+public class TestMaximumGenerics<Type extends Comparable<Type>>{
+	Type elements[];
 	
-	TestMaximumGenerics(Type first, Type second, Type third) {
-		this.first = first;
-		this.second = second;
-		this.third = third;
+	TestMaximumGenerics(Type[] elements) {
+		this.elements = elements;
+	}
+	
+	public void add(Type element) {
+		elements[elements.length] = element;
 	}
 	
 	public Type testMaximum() {
-		return TestMaximumGenerics.testMaximum(first, second, third);
+		return TestMaximumGenerics.testMaximum(elements);
 	}
 	
-	public static <Type extends Comparable<Type>> Type testMaximum(Type first, Type second, Type third) {
-		if (first.compareTo(second) > 0 && first.compareTo(third) > 0) {
-			return first;
-		} else if (second.compareTo(third) > 0) {
-			return second;
-		} else {
-			return third;
-		}
+	public static <Type extends Comparable<Type>> Type max(Type[] elements) {
+		return sort(elements)[0];
+	}
+	
+	public static <Type extends Comparable<Type>> Type[] sort(Type[] elements) {
+		Type tempElement;
+		for(int i = 0; i < elements.length - 1; i++)
+			for(int j = 0; j < elements.length - i - 1; j++)
+				if(elements[j].compareTo(elements[j+1]) < 0) {
+					tempElement = elements[j];
+					elements[j] = elements[j+1];
+					elements[j+1] = tempElement;
+				}
+		return elements;
+	}
+	
+	public static <Type extends Comparable<Type>> Type testMaximum(Type[] elements) {
+		return max(elements);
 	}
 	
 	public static void main(String[] args) {
@@ -32,58 +44,85 @@ public class TestMaximumGenerics<Type extends Comparable<Type>> {
 		System.out.println("Three Integers :");
 		System.out.println("Test case 1.1");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of 3, 2, 1 is : "+new TestMaximumGenerics<Integer>(3, 2, 1).testMaximum());
-		System.out.println("Maximum of 3, 1, 2 is : "+new TestMaximumGenerics<Integer>(3, 1, 2).testMaximum());
-		System.out.println("Maximum of 3, 1, 1 is : "+new TestMaximumGenerics<Integer>(3, 1, 1).testMaximum());
+		Integer[] intArr1 = {3, 2, 1};
+		System.out.println("Maximum of 3, 2, 1 is : "+new TestMaximumGenerics<Integer>(intArr1).testMaximum());
+		Integer[] intArr2 = {3, 1, 2};
+		System.out.println("Maximum of 3, 1, 2 is : "+new TestMaximumGenerics<Integer>(intArr2).testMaximum());
+		Integer[] intArr3 = {3, 1, 1};
+		System.out.println("Maximum of 3, 1, 1 is : "+new TestMaximumGenerics<Integer>(intArr3).testMaximum());
 		
 		System.out.println("Test case 1.2");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of 2, 3, 1 is : "+new TestMaximumGenerics<Integer>(2, 3, 1).testMaximum());
-		System.out.println("Maximum of 1, 3, 2 is : "+new TestMaximumGenerics<Integer>(1, 3, 2).testMaximum());
-		System.out.println("Maximum of 1, 3, 1 is : "+new TestMaximumGenerics<Integer>(1, 3, 1).testMaximum());
+		Integer[] intArr4 = {2, 3, 1};
+		System.out.println("Maximum of 2, 3, 1 is : "+new TestMaximumGenerics<Integer>(intArr4).testMaximum());
+		Integer[] intArr5 = {1, 3, 2};
+		System.out.println("Maximum of 1, 3, 2 is : "+new TestMaximumGenerics<Integer>(intArr5).testMaximum());
+		Integer[] intArr6 = {1, 3, 1};
+		System.out.println("Maximum of 1, 3, 1 is : "+new TestMaximumGenerics<Integer>(intArr6).testMaximum());
 		
 		System.out.println("Test case 1.3");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of 2, 1, 3 is : "+new TestMaximumGenerics<Integer>(2, 1, 3).testMaximum());
-		System.out.println("Maximum of 1, 2, 3 is : "+new TestMaximumGenerics<Integer>(1, 2, 3).testMaximum());
-		System.out.println("Maximum of 1, 1, 3 is : "+new TestMaximumGenerics<Integer>(1, 1, 3).testMaximum());
+		Integer[] intArr7 = {2, 1, 3};
+		System.out.println("Maximum of 2, 1, 3 is : "+new TestMaximumGenerics<Integer>(intArr7).testMaximum());
+		Integer[] intArr8 = {1, 2, 3};
+		System.out.println("Maximum of 1, 2, 3 is : "+new TestMaximumGenerics<Integer>(intArr8).testMaximum());
+		Integer[] intArr9 = {1, 1, 3};
+		System.out.println("Maximum of 1, 1, 3 is : "+new TestMaximumGenerics<Integer>(intArr9).testMaximum());
 		
 		System.out.println("Three Floats :");
 		System.out.println("Test case 2.1");
 		// Test Case 2.1 maximum number at first position 
-		System.out.println("Maximum of 3.0f, 2.0f, 1.0f is : "+new TestMaximumGenerics<Float>(3.0f, 2.0f, 1.0f).testMaximum());
-		System.out.println("Maximum of 3.0f, 1.0f, 2.0f is : "+new TestMaximumGenerics<Float>(3.0f, 1.0f, 2.0f).testMaximum());
-		System.out.println("Maximum of 3.0f, 1.0f, 1.0f is : "+new TestMaximumGenerics<Float>(3.0f, 1.0f, 1.0f).testMaximum());
+		Float[] floatArr1 = {3.0f, 2.0f, 1.0f};
+		System.out.println("Maximum of 3.0f, 2.0f, 1.0f is : "+new TestMaximumGenerics<Float>(floatArr1).testMaximum());
+		Float[] floatArr2 = {3.0f, 1.0f, 2.0f};
+		System.out.println("Maximum of 3.0f, 1.0f, 2.0f is : "+new TestMaximumGenerics<Float>(floatArr2).testMaximum());
+		Float[] floatArr3 = {3.0f, 1.0f, 1.0f};
+		System.out.println("Maximum of 3.0f, 1.0f, 1.0f is : "+new TestMaximumGenerics<Float>(floatArr3).testMaximum());
 		
 		System.out.println("Test case 1.2");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of 2.0f, 3.0f, 1.0f is : "+new TestMaximumGenerics<Float>(2.0f, 3.0f, 1.0f).testMaximum());
-		System.out.println("Maximum of 1.0f, 3.0f, 2.0f is : "+new TestMaximumGenerics<Float>(1.0f, 3.0f, 2.0f).testMaximum());
-		System.out.println("Maximum of 1.0f, 3.0f, 1.0f is : "+new TestMaximumGenerics<Float>(1.0f, 3.0f, 1.0f).testMaximum());
+		Float[] floatArr4 = {2.0f, 3.0f, 1.0f};
+		System.out.println("Maximum of 2.0f, 3.0f, 1.0f is : "+new TestMaximumGenerics<Float>(floatArr4).testMaximum());
+		Float[] floatArr5 = {1.0f, 3.0f, 2.0f};
+		System.out.println("Maximum of 1.0f, 3.0f, 2.0f is : "+new TestMaximumGenerics<Float>(floatArr5).testMaximum());
+		Float[] floatArr6 = {1.0f, 3.0f, 1.0f};
+		System.out.println("Maximum of 1.0f, 3.0f, 1.0f is : "+new TestMaximumGenerics<Float>(floatArr6).testMaximum());
 		
 		System.out.println("Test case 1.3");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of 2.0f, 1.0f, 3.0f is : "+new TestMaximumGenerics<Float>(2.0f, 1.0f, 3.0f).testMaximum());
-		System.out.println("Maximum of 1.0f, 2.0f, 3.0f is : "+new TestMaximumGenerics<Float>(1.0f, 2.0f, 3.0f).testMaximum());
-		System.out.println("Maximum of 1.0f, 1.0f, 3.0f is : "+new TestMaximumGenerics<Float>(1.0f, 1.0f, 3.0f).testMaximum());
+		Float[] floatArr7 = {2.0f, 1.0f, 3.0f};
+		System.out.println("Maximum of 2.0f, 1.0f, 3.0f is : "+new TestMaximumGenerics<Float>(floatArr7).testMaximum());
+		Float[] floatArr8 = {1.0f, 2.0f, 3.0f};
+		System.out.println("Maximum of 1.0f, 2.0f, 3.0f is : "+new TestMaximumGenerics<Float>(floatArr8).testMaximum());
+		Float[] floatArr9 = {1.0f, 1.0f, 3.0f};
+		System.out.println("Maximum of 1.0f, 1.0f, 3.0f is : "+new TestMaximumGenerics<Float>(floatArr9).testMaximum());
 		
 		System.out.println("Three Strings :");
 		System.out.println("Test case 1.1");
 		// Test Case 1.1 maximum string at first position 
-		System.out.println("Maximum of Peach, Apple, Banana is : "+new TestMaximumGenerics<String>("Peach", "Apple", "Banana").testMaximum());
-		System.out.println("Maximum of Peach, Banana, Apple is : "+new TestMaximumGenerics<String>("Peach", "Banana", "Apple").testMaximum());
-		System.out.println("Maximum of Peach, Apple, Apple is : "+new TestMaximumGenerics<String>("Peach", "Apple", "Apple").testMaximum());
+		String[] strArr1 = {"Peach", "Apple", "Banana"};
+		System.out.println("Maximum of Peach, Apple, Banana is : "+new TestMaximumGenerics<String>(strArr1).testMaximum());
+		String[] strArr2 = {"Peach", "Banana", "Apple"};
+		System.out.println("Maximum of Peach, Banana, Apple is : "+new TestMaximumGenerics<String>(strArr2).testMaximum());
+		String[] strArr3 = {"Peach", "Apple", "Apple"};
+		System.out.println("Maximum of Peach, Apple, Apple is : "+new TestMaximumGenerics<String>(strArr3).testMaximum());
 		
 		System.out.println("Test case 1.2");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of Apple, Peach, Banana is : "+new TestMaximumGenerics<String>("Apple", "Peach", "Banana").testMaximum());
-		System.out.println("Maximum of Banana, Peach, Apple is : "+new TestMaximumGenerics<String>("Banana", "Peach", "Apple").testMaximum());
-		System.out.println("Maximum of Apple, Peach, Apple is : "+new TestMaximumGenerics<String>("Apple", "Peach", "Apple").testMaximum());
+		String[] strArr4 = {"Apple", "Peach", "Banana"};
+		System.out.println("Maximum of Apple, Peach, Banana is : "+new TestMaximumGenerics<String>(strArr4).testMaximum());
+		String[] strArr5 = {"Banana", "Peach", "Apple"};
+		System.out.println("Maximum of Banana, Peach, Apple is : "+new TestMaximumGenerics<String>(strArr5).testMaximum());
+		String[] strArr6 = {"Apple", "Peach", "Apple"};
+		System.out.println("Maximum of Apple, Peach, Apple is : "+new TestMaximumGenerics<String>(strArr6).testMaximum());
 		
 		System.out.println("Test case 1.3");
 		// Test Case 1.1 maximum number at first position 
-		System.out.println("Maximum of Apple, Banana, Peach is : "+new TestMaximumGenerics<String>("Apple", "Banana", "Peach").testMaximum());
-		System.out.println("Maximum of Banana, Apple, Peach is : "+new TestMaximumGenerics<String>("Banana", "Apple", "Peach").testMaximum());
-		System.out.println("Maximum of Apple, Apple, Peach is : "+new TestMaximumGenerics<String>("Apple", "Apple", "Peach").testMaximum());
+		String[] strArr7 = {"Apple", "Banana", "Peach"};
+		System.out.println("Maximum of Apple, Banana, Peach is : "+new TestMaximumGenerics<String>(strArr7).testMaximum());
+		String[] strArr8 = {"Banana", "Apple", "Peach"};
+		System.out.println("Maximum of Banana, Apple, Peach is : "+new TestMaximumGenerics<String>(strArr8).testMaximum());
+		String[] strArr9 = {"Apple", "Apple", "Peach"};
+		System.out.println("Maximum of Apple, Apple, Peach is : "+new TestMaximumGenerics<String>(strArr9).testMaximum());
 	}
 }
